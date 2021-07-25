@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <AssemblyName>WeatherCalculation</AssemblyName>
+        <PackageId>WeatherCalculation</PackageId>
+        <Authors>DiedTho</Authors>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageLicenseUrl>https://www.gnu.org/licenses/gpl-3.0.html</PackageLicenseUrl>
+        <PackageVersion>1.0.4</PackageVersion>
+        <Description>Es fehlen noch eine Prüfung auf Plausibilität der Eingabewerte und Prüfungen auf realistische Eingaben.
+            Ein paar Formeln sind noch nicht richtig, Verbesserungen folgen in Bälde.
+        </Description>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <DocumentationFile>bin\Debug\net5.0\ClassLib_WeatherCalculation.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <DocumentationFile>bin\Release\net5.0\ClassLib_WeatherCalculation.xml</DocumentationFile>
+    </PropertyGroup>
+
+
+</Project>

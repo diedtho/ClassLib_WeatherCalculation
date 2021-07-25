@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WeatherCalculation</name>
+    </assembly>
+    <members>
+        <member name="T:ClassLib_WeatherCalculation.Consts">
+            <summary>
+            Benötigte Konstanten
+            </summary>
+        </member>
+        <member name="F:ClassLib_WeatherCalculation.Consts.mGWD">
+            <summary>
+            Konstante 'Molekulargewicht des Wasserdampfes' in [kg/kmol].
+            </summary>
+        </member>
+        <member name="F:ClassLib_WeatherCalculation.Consts.univGK">
+            <summary>
+            Konstante 'universelle Gaskonstante' in [J/(kmol*K)].
+            </summary>
+        </member>
+        <member name="T:WeatherCalc">
+            <summary>
+            Verschiedene Methoden für Wetterdatenberechnungen
+            </summary>
+        </member>
+        <member name="P:WeatherCalc.luftTempC">
+            <summary>
+            Variable 'Lufttemperatur' in [°C].
+            </summary>
+        </member>
+        <member name="P:WeatherCalc.luftTempK">
+            <summary>
+            Variable 'Lufttemperatur' in [°K].
+            </summary>
+        </member>
+        <member name="P:WeatherCalc.absLuftFeuchtGpCm">
+            <summary>
+            Variable 'absolute Luftfeuchtigkeit' in [g/m3].
+            </summary>
+        </member>
+        <member name="P:WeatherCalc.relLuftFeuchtProz">
+            <summary>
+            Variable 'relative Luftfeuchtigkeit' in [%].
+            </summary>
+        </member>
+        <member name="P:WeatherCalc.windGeschwMpS">
+            <summary>
+            Variable 'Windgeschwindigkeit' in [m/sec].
+            </summary>
+        </member>
+        <member name="P:WeatherCalc.windGeschwKmpH">
+            <summary>
+            Variable 'Windgeschwindigkeit' in [km/h].
+            </summary>
+        </member>
+        <member name="P:WeatherCalc.tauPunktC">
+            <summary>
+            Variable 'Taupunkt' in [°C].
+            </summary>
+        </member>
+        <member name="P:WeatherCalc.spreadC">
+            <summary>
+            Variable 'Spread' in [°C].
+            </summary>
+        </member>
+        <member name="P:WeatherCalc.wolkenUnterGrenzeM">
+            <summary>
+            Variable 'Wolkenuntergrenze' in [m].
+            </summary>
+        </member>
+        <member name="P:WeatherCalc.windChillTemp">
+            <summary>
+            Variable 'WindchillTemperatur' in [°C].
+            </summary>
+        </member>
+        <member name="P:WeatherCalc.saettDDbyC">
+            <summary>
+            Variable 'Sättigungsdampfdruck' aus Temperatur in [°C].
+            </summary>
+        </member>
+        <member name="P:WeatherCalc.saettDDbyCplusRelLF">
+            <summary>
+            Variable 'Sättigungsdampfdruck' aus Temperatur in [°C] und rel. Luftfeuchte in [%].
+            </summary>
+        </member>
+        <member name="P:WeatherCalc.hitzeIndex">
+            <summary>
+            Variable 'Hitzeindex' in [°C].
+            </summary>
+        </member>
+        <member name="M:WeatherCalc.calcWindChillTemp">
+            <summary>
+            Methode 'Berechnen von WCT (Windchilltemperatur)' in [°C].
+            </summary>
+        </member>
+        <member name="M:WeatherCalc.calcC2K">
+            <summary>
+            Methode 'Temperaturumrechnung in [°C] zu [°K].
+            </summary>
+        </member>
+        <member name="M:WeatherCalc.calcK2C">
+            <summary>
+            Methode 'Temperaturumrechnung in [°K] zu [°C].
+            </summary>
+        </member>
+        <member name="M:WeatherCalc.calcWindgeschwMpS2KmpH">
+            <summary>
+            Methode 'Umrechnung Windgewschwindigket [m/sec] -> [km/h]'.
+            </summary>
+        </member>
+        <member name="M:WeatherCalc.calcSDDbyC">
+            <summary>
+            Methode 'Berechnung des Sättingsdampfdrucks aus Temperatur in [°C]'.
+            </summary>
+        </member>
+        <member name="M:WeatherCalc.calcSDDbyTplusRelLF">
+            <summary>
+            Methode 'Berechnung des Dampfdrucks aus Temperatur + rel. Luftfeuchte'.
+            </summary>
+        </member>
+        <member name="M:WeatherCalc.calcTaupunkt">
+            <summary>
+            Methode 'Berechnung des Taupunkts in [°C]'.
+            </summary>
+        </member>
+        <member name="M:WeatherCalc.calcAbsLF">
+            <summary>
+            Methode 'Berechnung der absoluten Luftfeuchte'.
+            </summary>
+        </member>
+        <member name="M:WeatherCalc.calcSpreadC">
+            <summary>
+            Methode 'Berechnung des Spreads in [°C]'.
+            </summary>
+        </member>
+        <member name="M:WeatherCalc.calcWolkenuntergrenzeM">
+            <summary>
+            Methode 'Berechnung der Wolkenuntergrenze in [m]'.
+            </summary>
+        </member>
+        <member name="M:WeatherCalc.calcHitzeIndex">
+            <summary>
+            Methode 'Berechnung des Hitzeindex'.
+            </summary>
+        </member>
+        <member name="M:WeatherCalc.InitWeatherCalcCelsius(System.Double,System.Double,System.Double)">
+            <summary>
+            /// Initialisierung der Klasse:
+            Lufttemperatur in Celsius
+            und relative Luftfeuchte müssen mindestens angegeben werden
+            </summary>
+            <param name="luftTempCIn"></param>
+            <param name="relLFIn"></param>
+            <param name="windGeschwMpSec"></param>
+        </member>
+        <member name="M:WeatherCalc.InitWeatherCalcKelvin(System.Double,System.Double,System.Double)">
+            <summary>
+            Initialisierung der Klasse:
+            Lufttemperatur in Kelvin
+            und relative Luftfeuchte müssen mindestens angegeben werden
+            </summary>
+            <param name="luftTempKIn"></param>
+            <param name="relLFIn"></param>
+        </member>
+        <member name="M:WeatherCalc.CalculateAll">
+            <summary>
+            Alle Berechnungen in richtiger Reihenfolge durchführen.
+            </summary>
+        </member>
+    </members>
+</doc>

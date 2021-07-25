@@ -1,0 +1,13 @@
+/home/zarko/RiderProjects/ClassLib_WeatherCalculation/ClassLib_WeatherCalculation/bin/Debug/net5.0/ClassLib_WeatherCalculation.xml
+/home/zarko/RiderProjects/ClassLib_WeatherCalculation/ClassLib_WeatherCalculation/bin/Debug/net5.0/WeatherCalculation.deps.json
+/home/zarko/RiderProjects/ClassLib_WeatherCalculation/ClassLib_WeatherCalculation/bin/Debug/net5.0/WeatherCalculation.dll
+/home/zarko/RiderProjects/ClassLib_WeatherCalculation/ClassLib_WeatherCalculation/bin/Debug/net5.0/ref/WeatherCalculation.dll
+/home/zarko/RiderProjects/ClassLib_WeatherCalculation/ClassLib_WeatherCalculation/bin/Debug/net5.0/WeatherCalculation.pdb
+/home/zarko/RiderProjects/ClassLib_WeatherCalculation/ClassLib_WeatherCalculation/obj/Debug/net5.0/ClassLib_WeatherCalculation.csproj.AssemblyReference.cache
+/home/zarko/RiderProjects/ClassLib_WeatherCalculation/ClassLib_WeatherCalculation/obj/Debug/net5.0/ClassLib_WeatherCalculation.GeneratedMSBuildEditorConfig.editorconfig
+/home/zarko/RiderProjects/ClassLib_WeatherCalculation/ClassLib_WeatherCalculation/obj/Debug/net5.0/ClassLib_WeatherCalculation.AssemblyInfoInputs.cache
+/home/zarko/RiderProjects/ClassLib_WeatherCalculation/ClassLib_WeatherCalculation/obj/Debug/net5.0/ClassLib_WeatherCalculation.AssemblyInfo.cs
+/home/zarko/RiderProjects/ClassLib_WeatherCalculation/ClassLib_WeatherCalculation/obj/Debug/net5.0/ClassLib_WeatherCalculation.csproj.CoreCompileInputs.cache
+/home/zarko/RiderProjects/ClassLib_WeatherCalculation/ClassLib_WeatherCalculation/obj/Debug/net5.0/WeatherCalculation.dll
+/home/zarko/RiderProjects/ClassLib_WeatherCalculation/ClassLib_WeatherCalculation/obj/Debug/net5.0/ref/WeatherCalculation.dll
+/home/zarko/RiderProjects/ClassLib_WeatherCalculation/ClassLib_WeatherCalculation/obj/Debug/net5.0/WeatherCalculation.pdb
