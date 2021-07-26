@@ -54,9 +54,34 @@
             Variable 'Windgeschwindigkeit' in [km/h].
             </summary>
         </member>
+        <member name="F:WeatherCalc.aLW">
+            <summary>
+            Variablen für Magnus-Formel-Parameter
+            </summary>
+        </member>
+        <member name="F:WeatherCalc.bLW">
+            <summary>
+            Variablen für Magnus-Formel-Parameter
+            </summary>
+        </member>
+        <member name="F:WeatherCalc.aE">
+            <summary>
+            Variablen für Magnus-Formel-Parameter
+            </summary>
+        </member>
+        <member name="F:WeatherCalc.bE">
+            <summary>
+            Variablen für Magnus-Formel-Parameter
+            </summary>
+        </member>
         <member name="P:WeatherCalc.tauPunktC">
             <summary>
             Variable 'Taupunkt' in [°C].
+            </summary>
+        </member>
+        <member name="P:WeatherCalc.frostPunktC">
+            <summary>
+            Variable 'Frostpunkt' in [°C].
             </summary>
         </member>
         <member name="P:WeatherCalc.spreadC">
@@ -74,14 +99,26 @@
             Variable 'WindchillTemperatur' in [°C].
             </summary>
         </member>
-        <member name="P:WeatherCalc.saettDDbyC">
+        <member name="P:WeatherCalc.SDDbyC4T">
             <summary>
-            Variable 'Sättigungsdampfdruck' aus Temperatur in [°C].
+            Variable 'Sättigungsdampfdruck für Taupunkt' aus Temperatur in [°C].
             </summary>
         </member>
-        <member name="P:WeatherCalc.saettDDbyCplusRelLF">
+        <member name="P:WeatherCalc.SDDbyC4F">
+            <summary>
+            Variable 'Sättigungsdampfdruck für Frostpunkt' aus Temperatur in [°C].
+            </summary>
+        </member>
+        <member name="P:WeatherCalc.DDbyCplusRelLF4T">
             <summary>
             Variable 'Sättigungsdampfdruck' aus Temperatur in [°C] und rel. Luftfeuchte in [%].
+            für Taupunkt
+            </summary>
+        </member>
+        <member name="P:WeatherCalc.DDbyCplusRelLF4F">
+            <summary>
+            Variable 'Sättigungsdampfdruck' aus Temperatur in [°C] und rel. Luftfeuchte in [%].
+            für Frostpunkt
             </summary>
         </member>
         <member name="P:WeatherCalc.hitzeIndex">
@@ -114,14 +151,26 @@
             Methode 'Berechnung des Sättingsdampfdrucks aus Temperatur in [°C]'.
             </summary>
         </member>
-        <member name="M:WeatherCalc.calcSDDbyTplusRelLF">
+        <member name="M:WeatherCalc.calcDDbyTplusRelLF4T">
             <summary>
-            Methode 'Berechnung des Dampfdrucks aus Temperatur + rel. Luftfeuchte'.
+            Methode 'Berechnung des Dampfdrucks aus Sättigungsdampfdruck + rel. Luftfeuchte'
+             für Taupunktberechnung
+            </summary>
+        </member>
+        <member name="M:WeatherCalc.calcDDbyTplusRelLF4F">
+            <summary>
+            Methode 'Berechnung des Dampfdrucks aus Sättigungsdampfdruck + rel. Luftfeuchte'
+             für Frostunktberechnung
             </summary>
         </member>
         <member name="M:WeatherCalc.calcTaupunkt">
             <summary>
             Methode 'Berechnung des Taupunkts in [°C]'.
+            </summary>
+        </member>
+        <member name="M:WeatherCalc.calcFrostpunkt">
+            <summary>
+            Methode 'Berechnung des Frostpunkts in [°C]'.
             </summary>
         </member>
         <member name="M:WeatherCalc.calcAbsLF">
@@ -151,7 +200,7 @@
             und relative Luftfeuchte müssen mindestens angegeben werden
             </summary>
             <param name="luftTempCIn"></param>
-            <param name="relLFIn"></param>
+            <param name="relLf"></param>
             <param name="windGeschwMpSec"></param>
         </member>
         <member name="M:WeatherCalc.InitWeatherCalcKelvin(System.Double,System.Double,System.Double)">
@@ -161,7 +210,8 @@
             und relative Luftfeuchte müssen mindestens angegeben werden
             </summary>
             <param name="luftTempKIn"></param>
-            <param name="relLFIn"></param>
+            <param name="relLf"></param>
+            <param name="windGeschwMpSec"></param>
         </member>
         <member name="M:WeatherCalc.CalculateAll">
             <summary>

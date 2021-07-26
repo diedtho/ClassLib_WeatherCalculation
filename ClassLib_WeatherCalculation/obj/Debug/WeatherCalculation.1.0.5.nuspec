@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>WeatherCalculation</id>
+    <version>1.0.5</version>
+    <authors>DiedTho</authors>
+    <licenseUrl>https://www.gnu.org/licenses/gpl-3.0.html</licenseUrl>
+    <description>Es fehlen noch eine Prüfung auf Plausibilität der Eingabewerte und Prüfungen auf realistische Eingaben.
+            Die Berechnungen sind noch nicht sehr verlässlich, Verbesserungen folgen in Kürze.</description>
+    <dependencies>
+      <group targetFramework="net5.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="/home/zarko/RiderProjects/ClassLib_WeatherCalculation/ClassLib_WeatherCalculation/bin/Debug/net5.0/WeatherCalculation.dll" target="lib/net5.0/WeatherCalculation.dll" />
+    <file src="/home/zarko/RiderProjects/ClassLib_WeatherCalculation/ClassLib_WeatherCalculation/bin/Debug/net5.0/ClassLib_WeatherCalculation.xml" target="lib/net5.0/ClassLib_WeatherCalculation.xml" />
+  </files>
+</package>

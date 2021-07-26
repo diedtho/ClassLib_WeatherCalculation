@@ -7,9 +7,9 @@
         <Authors>DiedTho</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageLicenseUrl>https://www.gnu.org/licenses/gpl-3.0.html</PackageLicenseUrl>
-        <PackageVersion>1.0.4</PackageVersion>
+        <PackageVersion>1.0.5</PackageVersion>
         <Description>Es fehlen noch eine Prüfung auf Plausibilität der Eingabewerte und Prüfungen auf realistische Eingaben.
-            Ein paar Formeln sind noch nicht richtig, Verbesserungen folgen in Bälde.
+            Die Berechnungen sind noch nicht sehr verlässlich, Verbesserungen folgen in Kürze.
         </Description>
     </PropertyGroup>
 

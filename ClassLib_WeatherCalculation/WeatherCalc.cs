@@ -72,9 +72,19 @@ public static class WeatherCalc
     public static double windGeschwKmpH { get; set; }
 
     /// <summary>
+    /// Variablen für Magnus-Formel-Parameter
+    /// </summary>
+    private static double aLW, bLW, aE, bE ;
+
+    /// <summary>
     /// Variable 'Taupunkt' in [°C].
     /// </summary>
     public static double tauPunktC { get; set; }
+    
+    /// <summary>
+    /// Variable 'Frostpunkt' in [°C].
+    /// </summary>
+    public static double frostPunktC { get; set; }
 
     /// <summary>
     /// Variable 'Spread' in [°C].
@@ -92,14 +102,27 @@ public static class WeatherCalc
     public static double windChillTemp { get; set; }
 
     /// <summary>
-    /// Variable 'Sättigungsdampfdruck' aus Temperatur in [°C].
+    /// Variable 'Sättigungsdampfdruck für Taupunkt' aus Temperatur in [°C].
     /// </summary>
-    public static double saettDDbyC { get; set; }
+    public static double SDDbyC4T { get; set; }
+    
+    /// <summary>
+    /// Variable 'Sättigungsdampfdruck für Frostpunkt' aus Temperatur in [°C].
+    /// </summary>
+    public static double SDDbyC4F { get; set; }
+    
 
     /// <summary>
     /// Variable 'Sättigungsdampfdruck' aus Temperatur in [°C] und rel. Luftfeuchte in [%].
+    /// für Taupunkt
     /// </summary>
-    public static double saettDDbyCplusRelLF { get; set; }
+    public static double DDbyCplusRelLF4T { get; set; }
+    
+    /// <summary>
+    /// Variable 'Sättigungsdampfdruck' aus Temperatur in [°C] und rel. Luftfeuchte in [%].
+    /// für Frostpunkt
+    /// </summary>
+    public static double DDbyCplusRelLF4F { get; set; }
 
     /// <summary>
     /// Variable 'Hitzeindex' in [°C].
@@ -144,28 +167,45 @@ public static class WeatherCalc
     /// </summary>
     static void calcSDDbyC()
     {
-        double a, b;
-        if (luftTempC >= 0) // Sättigungsdampfdruck über Wasser
+        double expoF = 0.0;
+        double expoT = 0.0;
+
+        if (luftTempC >= 0) // Sättigungsdampfdruck
         {
-            a = 7.5;
-            b = 237.3;
+            aLW = 7.5;
+            bLW = 237.3;
+            expoT = aLW * luftTempC / (bLW + luftTempC);
         }
-        else // Sättigungsdampfdruck über Eis
+        else if (luftTempC < 0) // Sättigungsdampfdruck über Wasser (Taupunkt)
         {
-            a = 7.6;
-            b = 240.7;
+            aLW = 7.6;
+            bLW = 240.7;
+            expoT = (aLW * luftTempC) / (bLW + luftTempC);
+            aE = 9.5;
+            bE = 265.5;
+            expoF = (aE * luftTempC) / (bE + luftTempC);
         }
 
-        double expo = (a * luftTempC) / (b + luftTempC);
-        saettDDbyC = 6.1078 * Math.Pow(10, expo);
+        SDDbyC4T = 6.1078 * Math.Pow(10, expoT); // Sättigungsdampfdruck für Taupunktberechnung
+        SDDbyC4F = 6.1078 * Math.Pow(10, expoF); // Sättigungsdampfdruck für Frostpunktberechnung
     }
 
     /// <summary>
-    /// Methode 'Berechnung des Dampfdrucks aus Temperatur + rel. Luftfeuchte'.
+    /// Methode 'Berechnung des Dampfdrucks aus Sättigungsdampfdruck + rel. Luftfeuchte'
+    ///  für Taupunktberechnung
     /// </summary>
-    static void calcSDDbyTplusRelLF()
+    static void calcDDbyTplusRelLF4T()
     {
-        saettDDbyCplusRelLF = (relLuftFeuchtProz / 100) * saettDDbyC;
+        DDbyCplusRelLF4T = (relLuftFeuchtProz / 100) * SDDbyC4T;
+    }
+    
+    /// <summary>
+    /// Methode 'Berechnung des Dampfdrucks aus Sättigungsdampfdruck + rel. Luftfeuchte'
+    ///  für Frostunktberechnung
+    /// </summary>
+    static void calcDDbyTplusRelLF4F()
+    {
+        DDbyCplusRelLF4F = (relLuftFeuchtProz / 100) * SDDbyC4F;
     }
 
     /// <summary>
@@ -173,7 +213,18 @@ public static class WeatherCalc
     /// </summary>
     static void calcTaupunkt()
     {
-        tauPunktC = Math.Pow(10, (saettDDbyCplusRelLF / 6.1078));
+        double v = Math.Log10(DDbyCplusRelLF4T / 6.1078);
+        tauPunktC = bLW * v / (aLW - v);
+    }
+    
+    /// <summary>
+    /// Methode 'Berechnung des Frostpunkts in [°C]'.
+    /// </summary>
+    static void calcFrostpunkt()
+    {
+        double v = Math.Log10(DDbyCplusRelLF4F / 6.1078);
+        frostPunktC = bE * v / (aE - v);
+
     }
 
     /// <summary>
@@ -182,7 +233,7 @@ public static class WeatherCalc
     static void calcAbsLF()
     {
         // Wasserdampfdichte bzw. absolute Feuchte (g/m3)
-        absLuftFeuchtGpCm = Math.Pow(10, 5) * Consts.mGWD / Consts.univGK * saettDDbyC;
+        absLuftFeuchtGpCm = Math.Pow(10, 5) * (Consts.mGWD / Consts.univGK) * (DDbyCplusRelLF4T/luftTempK);
     }
 
 
@@ -221,16 +272,15 @@ public static class WeatherCalc
     /// und relative Luftfeuchte müssen mindestens angegeben werden
     /// </summary>
     /// <param name="luftTempCIn"></param>
-    /// <param name="relLFIn"></param>
+    /// <param name="relLf"></param>
     /// <param name="windGeschwMpSec"></param>
-    public static void InitWeatherCalcCelsius(double luftTempCIn, double relLFIn, double windGeschwMpSec)
+    public static void InitWeatherCalcCelsius(double luftTempCIn, double relLf, double windGeschwMpSec)
     {
-        Console.WriteLine("Initalisieren der Wetter-Toolbox mit Messwerten [°C][%]");
+        Console.WriteLine("Initalisieren der Wetter-Toolbox mit Messwerten [°C][%][m/s]");
         luftTempC = luftTempCIn;
-        relLuftFeuchtProz = relLFIn;
+        relLuftFeuchtProz = relLf;
         windGeschwMpS = windGeschwMpSec;
         calcC2K();
-        calcWindgeschwMpS2KmpH();
         CalculateAll();
     }
 
@@ -240,14 +290,15 @@ public static class WeatherCalc
     /// und relative Luftfeuchte müssen mindestens angegeben werden
     /// </summary>
     /// <param name="luftTempKIn"></param>
-    /// <param name="relLFIn"></param>
-    public static void InitWeatherCalcKelvin(double luftTempKIn, double relLFIn, double windGeschwMpSec)
+    /// <param name="relLf"></param>
+    /// <param name="windGeschwMpSec"></param>
+    public static void InitWeatherCalcKelvin(double luftTempKIn, double relLf, double windGeschwMpSec)
     {
-        Console.WriteLine("Initalisieren der Wetter-Toolbox mit Messwerten [°K][%]");
+        Console.WriteLine("Initalisieren der Wetter-Toolbox mit Messwerten [°K][%][m/s]");
         luftTempK = luftTempKIn;
-        relLuftFeuchtProz = relLFIn;
+        relLuftFeuchtProz = relLf;
+        windGeschwMpS = windGeschwMpSec;
         calcK2C();
-        calcWindgeschwMpS2KmpH();
         CalculateAll();
     }
 
@@ -257,14 +308,16 @@ public static class WeatherCalc
     public static void CalculateAll()
     {
         Console.WriteLine("Berechnen aller Daten anhand gegebener Werte.");
-        calcK2C();
+        calcWindgeschwMpS2KmpH();
         calcSDDbyC();
-        calcSDDbyTplusRelLF();
-        calcAbsLF();
-        calcWindChillTemp();
+        calcDDbyTplusRelLF4T();
+        calcDDbyTplusRelLF4F();
         calcTaupunkt();
+        calcFrostpunkt();
+        calcAbsLF();
         calcSpreadC();
         calcWolkenuntergrenzeM();
         calcHitzeIndex();
+        calcWindChillTemp();
     }
 }
